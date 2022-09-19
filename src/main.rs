@@ -4,10 +4,9 @@ use std::{collections::HashSet, fs::File, io::BufReader, usize};
 
 use serenity::async_trait;
 use serenity::framework::standard::{
-    StandardFramework,
     help_commands,
     macros::{group, help},
-    Args, CommandGroup, CommandResult, HelpOptions,
+    Args, CommandGroup, CommandResult, HelpOptions, StandardFramework,
 };
 use serenity::model::{channel::Message, gateway::Ready, id::UserId};
 use serenity::prelude::{Client, Context, EventHandler};
@@ -15,7 +14,7 @@ use serenity::prelude::{Client, Context, EventHandler};
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
 
-use commands::{channels::*, apex::*};
+use commands::{apex::*, channels::*};
 
 // Handler構造体。取得したいイベントを実装する
 struct Handler;
