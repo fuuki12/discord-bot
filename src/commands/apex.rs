@@ -39,7 +39,7 @@ async fn apex(ctx: &Context, msg: &Message) -> CommandResult {
         .say(
             &ctx.http,
             format!(
-                "〜のランクの順位は{}位です。",
+                "Rasさんのランクの順位は{}位です。",
                 obj["data"]["segments"][0]["stats"]["rankScore"]["rank"]
             ),
         )
