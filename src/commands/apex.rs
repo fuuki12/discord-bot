@@ -8,20 +8,19 @@ async fn apex(ctx: &Context, msg: &Message) -> CommandResult {
     use reqwest::Client;
     use std::env;
 
-    let key = match env::var("TRN_API_KEY") {
+    let key = match env::var("APEX_API_KEY") {
         Ok(val) => val,
         Err(_) => "local".to_string(),
     };
 
     // TODO コマンド引数を取れるようにする
-    let url = "https://public-api.tracker.gg/v2/apex/standard/profile/origin/CR_Ras_LOG";
+    let url = "https://api.mozambiquehe.re/predator?auth=";
 
     let client = Client::new();
 
     let resp = client
-        .get(url)
+        .get(String::from(url) + &key)
         .header(reqwest::header::CONTENT_TYPE, "application_json")
-        .header("TRN-Api-Key", &key)
         .send()
         .await
         .expect("Err creating client");
@@ -35,9 +34,16 @@ async fn apex(ctx: &Context, msg: &Message) -> CommandResult {
     msg.channel_id
         .say(
             &ctx.http,
+            format!("PCのプレデターボーダーは{}RPです。", obj["RP"]["PC"]["val"]),
+        )
+        .await?;
+
+    msg.channel_id
+        .say(
+            &ctx.http,
             format!(
-                "Rasさんのランクの順位は{}位です。",
-                obj["data"]["segments"][0]["stats"]["rankScore"]["rank"]
+                "PS4のプレデターボーダーは{}RPです。",
+                obj["RP"]["PS4"]["val"]
             ),
         )
         .await?;
